@@ -1,12 +1,16 @@
 <?php
 
-use App\Models\Category;
 use Carbon\Carbon;
+use App\Models\Tag;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 
 class PostSeeder extends Seeder
 {
+    protected $tags;
+    protected $categories;
+
     /**
      * Run the database seeds.
      *
@@ -14,24 +18,58 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        factory(Post::class)->create([
+        $this->fetchRelations();
+
+        $category1 = $this->categories->firstWhere('name', 'Ensayos');
+
+        $post1 = factory(Post::class)->create([
             'title' => 'Mi primer post',
             'excerpt' => 'Extracto de mi primer post',
             'body' => '<p>Contenido de mi primer post</p>',
             'published_at' => now(),
-            'category_id' => Category::firstWhere('name', 'Ensayos')
+            'category_id' => $category1->id
         ]);
 
-        factory(Post::class)->create([
+        DB::table('post_tag')->insert([
+            'post_id' => $post1->id,
+            'tag_id' => $this->tags->find(1)->id
+        ]);
+
+        DB::table('post_tag')->insert([
+            'post_id' => $post1->id,
+            'tag_id' => $this->tags->find(2)->id
+        ]);
+
+        DB::table('post_tag')->insert([
+            'post_id' => $post1->id,
+            'tag_id' => $this->tags->find(3)->id
+        ]);
+
+        $post2 = factory(Post::class)->create([
             'title' => 'Mi segundo post',
             'excerpt' => 'Extracto de mi segundo post',
             'body' => '<p>Contenido de mi segundo post</p>',
             'published_at' => now(),
-            'category_id' => Category::firstWhere('name', 'Paisajes')
+            'category_id' => $this->categories->firstWhere('name', 'Paisajes')
         ]);
 
-        factory(Post::class)->create([
-            'category_id' => Category::firstWhere('name', 'Paisajes')
+        DB::table('post_tag')->insert([
+            'post_id' => $post2->id,
+            'tag_id' => $this->tags->find(1)->id
+        ]);
+
+        DB::table('post_tag')->insert([
+            'post_id' => $post2->id,
+            'tag_id' => $this->tags->find(3)->id
+        ]);
+
+        $post3 = factory(Post::class)->create([
+            'category_id' => $this->categories->firstWhere('name', 'Paisajes')
+        ]);
+
+        DB::table('post_tag')->insert([
+            'post_id' => $post3->id,
+            'tag_id' => $this->tags->find(1)->id
         ]);
 
         factory(Post::class)->create([
@@ -40,5 +78,11 @@ class PostSeeder extends Seeder
             'published_at' => Carbon::createFromFormat('Y-m-d', '2019-09-20'),
             'category_id' => factory(Category::class)->create()->id
         ]);
+    }
+
+    protected function fetchRelations()
+    {
+        $this->tags = Tag::all();
+        $this->categories = Category::all();
     }
 }
