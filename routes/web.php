@@ -17,8 +17,13 @@ Route::get('/', 'PagesController@home');
 
 Route::get('home', 'HomeController@index')->name('home');
 
-Route::middleware('auth')->namespace('Admin')->prefix('admin')->group(function() {
-    Route::get('posts', 'PostController@index');
+Route::middleware('auth')
+    ->namespace('Admin')
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function()
+{
+    Route::get('posts', 'PostController@index')->name('posts.index');
 });
 
 Auth::routes(['register' => false]);

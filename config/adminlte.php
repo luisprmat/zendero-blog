@@ -245,12 +245,12 @@ return [
         // ],
         [
             'text'    => 'Blog',
-            'icon'    => 'fas fa-fw fa-share',
+            'icon'    => 'fas fa-fw fa-bars',
             'submenu' => [
                 [
                     'text' => 'Ver todos los posts',
                     'icon' => 'fas fa-fw fa-eye',
-                    'url'  => '#',
+                    'route'  => 'admin.posts.index',
                 ],
                 [
                     'text' => 'Editar posts',
