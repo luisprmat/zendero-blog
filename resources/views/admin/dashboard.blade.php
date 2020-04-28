@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Bienvenido {{ auth()->user()->name }}</p>
 @stop
 
 {{-- @section('css')

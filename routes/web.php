@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,20 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $posts = Post::latest('published_at')->get();
+Route::get('/', 'PagesController@home');
 
-    return view('welcome', compact('posts'));
-});
+Route::get('home', 'HomeController@index')->name('home');
 
-Route::get('posts', function() {
-    return Post::all();
+Route::middleware('auth')->namespace('Admin')->prefix('admin')->group(function() {
+    Route::get('posts', 'PostController@index');
 });
 
 Auth::routes(['register' => false]);
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('admin', function () {
-    return view('admin.dashboard');
-});
