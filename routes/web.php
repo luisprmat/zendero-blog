@@ -23,3 +23,11 @@ Route::get('/', function () {
 Route::get('posts', function() {
     return Post::all();
 });
+
+Auth::routes(['register' => false]);
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('admin', function () {
+    return view('admin.dashboard');
+});
