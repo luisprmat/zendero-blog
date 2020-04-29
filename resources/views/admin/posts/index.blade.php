@@ -53,7 +53,7 @@
                 "autoWidth": false,
                 "responsive": true,
                 "language" : {
-                    "url": "dataTables.spanish.lang",
+                    "url": "/dataTables.spanish.lang"
                 }
             });
         });

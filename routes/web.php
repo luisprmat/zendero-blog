@@ -15,14 +15,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'PagesController@home');
 
-Route::get('home', 'HomeController@index')->name('home');
-
 Route::middleware('auth')
     ->namespace('Admin')
     ->prefix('admin')
     ->name('admin.')
     ->group(function()
 {
+    Route::get('/', 'AdminController@index')->name('dashboard');
     Route::get('posts', 'PostController@index')->name('posts.index');
 });
 

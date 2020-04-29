@@ -167,7 +167,7 @@ return [
 
     'use_route_url' => true,
 
-    'dashboard_url' => 'home',
+    'dashboard_url' => 'admin.dashboard',
 
     'logout_url' => 'logout',
 
@@ -229,7 +229,7 @@ return [
         ['header' => 'navigation'],
         [
             'text' => 'home',
-            'url'  => 'admin/settings',
+            'route'  => 'admin.dashboard',
             'icon' => 'fas fa-fw fa-home',
         ],
         // ['header' => 'account_settings'],
