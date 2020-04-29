@@ -253,9 +253,9 @@ return [
                     'route'  => 'admin.posts.index',
                 ],
                 [
-                    'text' => 'Editar posts',
+                    'text' => 'Crear un post',
                     'icon' => 'fas fa-fw fa-pencil-alt',
-                    'url'  => '#',
+                    'route'  => 'admin.posts.create',
                 ],
                 // [
                 //     'text'    => 'level_one',
