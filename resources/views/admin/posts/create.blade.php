@@ -65,6 +65,18 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label for="tags">Etiquetas</label>
+                            <select class="select2bs4"
+                                multiple="multiple"
+                                data-placeholder="Seleccione una o más etiquetas"
+                                style="width: 100%;"
+                            >
+                                @foreach ($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="excerpt">Extracto publicación</label>
                             <textarea type="text" name="excerpt"
                                 id="excerpt" class="form-control"
@@ -82,7 +94,9 @@
 @stop
 
 @push('my_scripts')
+    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     <script src="/adminlte/plugins/moment/moment.min.js"></script>
+    <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
     <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
     <script>
         $(function() {
@@ -102,9 +116,20 @@
                 maxYear: parseInt(moment().add(10, 'years').format('YYYY'),10)
             });
         });
+
+        //Initialize Select2 Elements
+        $('.select2bs4').select2({
+            theme: 'bootstrap4'
+        })
+
+        CKEDITOR.replace('body');
     </script>
 @endpush
 
 @push('my_styles')
     <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="/adminlte/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/adminlte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 @endpush
