@@ -16,7 +16,6 @@ try {
     require('bootstrap');
 
     require('datatables.net-bs4')(); //This must be loaded after of bootstrap
-
 } catch (e) {}
 
 /**

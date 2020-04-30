@@ -24,6 +24,7 @@
     @else
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     @endif
+    @stack('my_styles') {{-- My Styles --}}
 	@yield('load_css')
     @yield('meta_tags')
 
@@ -64,6 +65,7 @@
 @else
 <script src="{{ mix('js/app.js') }}"></script>
 @endif
+@stack('my_scripts') {{-- My scripts--}}
 @yield('load_js')
 </body>
 </html>

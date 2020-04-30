@@ -47,11 +47,32 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body">
                         <div class="form-group">
+                            <label for="published_at">Fecha de publicación</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="far fa-calendar-alt fa-fw"></i></span>
+                                </div>
+                                <input type="text" class="form-control" name="published_at" id="published_at">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Categorías</label>
+                            <select name="category_id" id="category" class="form-control">
+                                <option value="">Selecciona una categoría</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="excerpt">Extracto publicación</label>
                             <textarea type="text" name="excerpt"
                                 id="excerpt" class="form-control"
                                 placeholder="Ingresa un extracto de la publicación"
                             ></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Guardar publicación</button>
                         </div>
                     </div>
                 </div>
@@ -59,3 +80,31 @@
         </div>
     </form>
 @stop
+
+@push('my_scripts')
+    <script src="/adminlte/plugins/moment/moment.min.js"></script>
+    <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
+    <script>
+        $(function() {
+            $('#published_at').daterangepicker({
+                singleDatePicker: true,
+                locale: {
+                    daysOfWeek: [
+                        'Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'
+                    ],
+                    monthNames: [
+                        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                    ]
+                },
+                showDropdowns: true,
+                minYear: 1937,
+                maxYear: parseInt(moment().add(10, 'years').format('YYYY'),10)
+            });
+        });
+    </script>
+@endpush
+
+@push('my_styles')
+    <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css">
+@endpush
