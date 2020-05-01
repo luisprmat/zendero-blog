@@ -4,6 +4,7 @@ use Carbon\Carbon;
 use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 
 class PostSeeder extends Seeder
@@ -24,6 +25,7 @@ class PostSeeder extends Seeder
 
         $post1 = factory(Post::class)->create([
             'title' => 'Mi primer post',
+            'url' => Str::slug('Mi primer post'),
             'excerpt' => 'Extracto de mi primer post',
             'body' => '<p>Contenido de mi primer post</p>',
             'published_at' => now(),
@@ -47,6 +49,7 @@ class PostSeeder extends Seeder
 
         $post2 = factory(Post::class)->create([
             'title' => 'Mi segundo post',
+            'url' => Str::slug('Mi segundo post'),
             'excerpt' => 'Extracto de mi segundo post',
             'body' => '<p>Contenido de mi segundo post</p>',
             'published_at' => now(),

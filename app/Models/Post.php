@@ -13,6 +13,11 @@ class Post extends Model
         'published_at' => 'datetime',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'url';
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

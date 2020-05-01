@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'PagesController@home');
-Route::get('blog/{id}', 'PostController@show');
+Route::get('blog/{post}', 'PostController@show');
 
 Route::middleware('auth')
     ->namespace('Admin')

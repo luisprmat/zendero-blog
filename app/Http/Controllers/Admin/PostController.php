@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
-use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Post;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
@@ -38,6 +39,7 @@ class PostController extends Controller
         // return Post::create($request->all());
         $post = new Post;
         $post->title = $request->title;
+        $post->url = Str::slug($request->title);
         $post->body = $request->body;
         $post->excerpt = $request->excerpt;
         $post->published_at = $request->published_at;
