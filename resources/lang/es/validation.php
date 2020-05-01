@@ -135,6 +135,9 @@ return [
         'email' => [
             'unique' => 'El :attribute ya ha sido registrado.',
         ],
+        'tags' => [
+            'required' => 'Debes seleccionar una o más :attribute'
+        ]
     ],
 
     /*
@@ -152,6 +155,7 @@ return [
         'address'               => 'dirección',
         'age'                   => 'edad',
         'body'                  => 'contenido',
+        'category'              => 'categoría',
         'city'                  => 'ciudad',
         'content'               => 'contenido',
         'country'               => 'país',
@@ -176,6 +180,7 @@ return [
         'second'                => 'segundo',
         'sex'                   => 'sexo',
         'subject'               => 'asunto',
+        'tags'                  => 'etiquetas',
         'terms'                 => 'términos',
         'time'                  => 'hora',
         'title'                 => 'título',

@@ -24,6 +24,7 @@ Route::middleware('auth')
     Route::get('/', 'AdminController@index')->name('dashboard');
     Route::get('posts', 'PostController@index')->name('posts.index');
     Route::get('posts/create', 'PostController@create')->name('posts.create');
+    Route::post('posts', 'PostController@store')->name('posts.store');
 });
 
 Auth::routes(['register' => false]);
