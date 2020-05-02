@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'PagesController@home');
-Route::get('blog/{post}', 'PostController@show');
+Route::get('blog/{post}', 'PostController@show')->name('posts.show');
 
 Route::middleware('auth')
     ->namespace('Admin')
@@ -28,6 +28,8 @@ Route::middleware('auth')
     Route::post('posts', 'PostController@store')->name('posts.store');
     Route::get('posts/{post}', 'PostController@edit')->name('posts.edit');
     Route::put('posts/{post}', 'PostController@update')->name('posts.update');
+
+    Route::post('posts/{post}/photos', 'PhotoController@store')->name('posts.photos.store');
 });
 
 Auth::routes(['register' => false]);

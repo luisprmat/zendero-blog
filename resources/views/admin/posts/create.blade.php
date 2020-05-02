@@ -17,6 +17,7 @@
                             id="title" class="form-control @error('title') is-invalid @enderror"
                             placeholder="Ingresa aquí el título de la publicación"
                             value="{{ old('title') }}"
+                            required
                         >
                         @error('title')
                             <span class="invalid-feedback" role="alert">

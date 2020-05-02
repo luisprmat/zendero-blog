@@ -115,6 +115,9 @@
                             @enderror
                         </div>
                         <div class="form-group">
+                            <div class="dropzone"></div>
+                        </div>
+                        <div class="form-group">
                             <button type="submit" class="btn btn-primary btn-block">Guardar publicación</button>
                         </div>
                     </div>
@@ -125,6 +128,7 @@
 @stop
 
 @push('my_scripts')
+    <script src="/adminlte/plugins/dropzone/dropzone.js"></script>
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
     {{-- <script src="/adminlte/plugins/moment/moment.min.js"></script> --}}
     <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
@@ -170,10 +174,21 @@
         });
 
         CKEDITOR.replace('body');
+
+        new Dropzone('.dropzone', {
+            url: '/admin/posts/{{ $post->url }}/photos',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            dictDefaultMessage: 'Arrastra las fotos para subirlas'
+        });
+
+        Dropzone.autoDiscover = false;
     </script>
 @endpush
 
 @push('my_styles')
+    <link rel="stylesheet" href="/adminlte/plugins/dropzone/dropzone.css">
     {{-- <link rel="stylesheet" href="/adminlte/plugins/daterangepicker/daterangepicker.css"> --}}
     <link rel="stylesheet" href="{{ asset('/adminlte/plugins/gijgo/css/gijgo.css') }}">
 
