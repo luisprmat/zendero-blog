@@ -20,9 +20,10 @@
 @stop
 
 @section('content')
-<div class="card">
-    <div class="card-header">
-      <h3 class="card-title">Todas las publicaciones</h3>
+<div class="card card-primary card-outline">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="card-title">Todas las publicaciones</h3>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus fa-fw"></i> Crear publicación</button>
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -43,7 +44,7 @@
                             <td>{{ $post->title }}</td>
                             <td>{{ $post->excerpt }}</td>
                             <td>
-                                <a href="#" class="btn btn-info btn-xs"><i class="fas fa-pencil-alt fa-fw"></i></a>
+                                <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-info btn-xs"><i class="fas fa-pencil-alt fa-fw"></i></a>
                                 <a href="#" class="btn btn-danger btn-xs"><i class="fas fa-times fa-fw"></i></a>
                             </td>
                         </tr>
@@ -56,7 +57,7 @@
   </div>
 @stop
 
-@section('load_js')
+@push('my_scripts')
     <script>
         $(function () {
             $('#posts-table').DataTable({
@@ -72,7 +73,7 @@
             });
         });
     </script>
-@endsection
+@endpush
 
 {{-- @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">

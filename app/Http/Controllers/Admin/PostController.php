@@ -18,15 +18,35 @@ class PostController extends Controller
         return view('admin.posts.index', compact('posts'));
     }
 
-    public function create()
+    // public function create()
+    // {
+    //     $categories = Category::all();
+    //     $tags = Tag::all();
+
+    //     return view('admin.posts.create', compact('categories', 'tags'));
+    // }
+
+    public function store(Request $request)
+    {
+        $request->validate(['title' => 'required']);
+
+        $post = Post::create([
+            'title' => $request->title,
+            'url' => Str::slug($request->title)
+        ]);
+
+        return redirect()->route('admin.posts.edit', $post);
+    }
+
+    public function edit(Post $post)
     {
         $categories = Category::all();
         $tags = Tag::all();
 
-        return view('admin.posts.create', compact('categories', 'tags'));
+        return view('admin.posts.edit', compact('categories', 'tags', 'post'));
     }
 
-    public function store(Request $request)
+    public function update(Post $post, Request $request)
     {
         // validación
         $request->validate([
@@ -37,7 +57,6 @@ class PostController extends Controller
             'tags' => 'required'
         ]);
         // return Post::create($request->all());
-        $post = new Post;
         $post->title = $request->title;
         $post->url = Str::slug($request->title);
         $post->body = $request->body;
@@ -46,8 +65,8 @@ class PostController extends Controller
         $post->category_id = $request->category;
         $post->save();
 
-        $post->tags()->attach($request->tags);
+        $post->tags()->sync($request->tags);
 
-        return back()->withFlash('Tu publicación ha sido creada');
+        return back()->withFlash('Tu publicación ha sido guardada');
     }
 }

@@ -255,7 +255,11 @@ return [
                 [
                     'text' => 'Crear un post',
                     'icon' => 'fas fa-fw fa-pencil-alt',
-                    'route'  => 'admin.posts.create',
+                    'url'  => '#',
+                    'data' => [
+                        'toggle' => 'modal',
+                        'target' => '#exampleModal'
+                    ]
                 ],
                 // [
                 //     'text'    => 'level_one',

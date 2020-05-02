@@ -67,5 +67,6 @@
 @endif
 @stack('my_scripts') {{-- My scripts--}}
 @yield('load_js')
+@include('admin.posts.create')
 </body>
 </html>
