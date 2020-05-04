@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Photo;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Post;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
@@ -34,13 +36,21 @@ class PhotoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Post $post, Request $request)
     {
         $request->validate([
             'photo' => 'image|max:1024'
         ]);
 
-        $photo =  $request->file('name');
+        $photo =  $request->file('photo')->store('public');
+
+        $photoUrl = Storage::url($photo);
+
+        Photo::create([
+            'url' => $photoUrl,
+            'post_id' => $post->id
+        ]);
+
     }
 
     /**
