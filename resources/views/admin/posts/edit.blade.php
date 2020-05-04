@@ -175,12 +175,21 @@
 
         CKEDITOR.replace('body');
 
-        new Dropzone('.dropzone', {
+        var myDropzone = new Dropzone('.dropzone', {
             url: '/admin/posts/{{ $post->url }}/photos',
+            paramName: 'photo',
+            acceptedFiles: 'image/*',
+            maxFileSize: 0.1,
             headers: {
                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            dictDefaultMessage: 'Arrastra las fotos para subirlas'
+            dictDefaultMessage: 'Arrastra las fotos para subirlas',
+            dictInvalidFileType: 'Usted no puede cargar este tipo de archivo'
+        });
+
+        myDropzone.on('error', function (file, res) {
+            var msg = res.errors.photo[0]
+            $('.dz-error-message:last > span').text(msg)
         });
 
         Dropzone.autoDiscover = false;

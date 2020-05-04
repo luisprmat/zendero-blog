@@ -36,7 +36,11 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        return 'procesando imagen ....';
+        $request->validate([
+            'photo' => 'image|max:1024'
+        ]);
+
+        $photo =  $request->file('name');
     }
 
     /**

@@ -137,6 +137,9 @@ return [
         ],
         'tags' => [
             'required' => 'Debes seleccionar una o más :attribute'
+        ],
+        'photo' => [
+            'image' => 'La :attribute debe ser una imagen'
         ]
     ],
 
@@ -176,6 +179,7 @@ return [
         'password'              => 'contraseña',
         'password_confirmation' => 'confirmación de la contraseña',
         'phone'                 => 'teléfono',
+        'photo'                 => 'foto',
         'price'                 => 'precio',
         'second'                => 'segundo',
         'sex'                   => 'sexo',
