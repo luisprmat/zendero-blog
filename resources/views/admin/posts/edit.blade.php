@@ -76,6 +76,18 @@
                                 </span>
                             @enderror
                         </div>
+                        <div class="form-group">
+                            <label for="body">Contenido embebido (iframe)</label>
+                            <textarea type="text" name="iframe"
+                                id="iframe" class="form-control @error('iframe') is-invalid @enderror" rows="2"
+                                placeholder="Ingresa el código del contenido incrustado (audio o video)"
+                            >{{ old('iframe', $post->iframe) }}</textarea>
+                            @error('iframe')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                        </div>
                     </div>
                 </div>
             </div>
@@ -197,7 +209,7 @@
         });
 
         CKEDITOR.replace('body');
-        CKEDITOR.config.height = 350;
+        CKEDITOR.config.height = 242;
 
         var myDropzone = new Dropzone('.dropzone', {
             url: '/admin/posts/{{ $post->url }}/photos',
