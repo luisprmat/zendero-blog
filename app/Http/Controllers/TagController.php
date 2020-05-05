@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
-use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class TagController extends Controller
 {
     /**
      * Display the specified resource.
@@ -14,11 +13,11 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Tag $tag)
     {
         return view('welcome', [
-            'title' => "Publicaciones de la categoría '{$category->name}'",
-            'posts' => $category->posts()->paginate(1)
+            'title' => "Publicaciones de la etiqueta '{$tag->name}'",
+            'posts' => $tag->posts()->paginate()
         ]);
     }
 

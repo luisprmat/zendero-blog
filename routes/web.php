@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'PagesController@home');
 Route::get('blog/{post}', 'PostController@show')->name('posts.show');
 Route::get('categorias/{category}', 'CategoryController@show')->name('categories.show');
+Route::get('tags/{tag}', 'TagController@show')->name('tags.show');
 
 Route::middleware('auth')
     ->namespace('Admin')
