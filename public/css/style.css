@@ -294,9 +294,10 @@ a.btn-bar{
     font-size: 30px;
     background-color: rgba(0,0,0,.7);
 }
- .gallery-photos {
-     overflow: hidden;
- }
+
+.gallery-photos {
+    overflow: hidden;
+}
 
 
 

@@ -36830,3 +36830,7 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
   display: none;
 }
 
+.btn-close {
+  position: absolute;
+}
+

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Crear')
+@section('title', 'Editar post')
 
 @section('content_header')
     <div class="row mb-2">
@@ -21,10 +21,33 @@
 @stop
 
 @section('content')
-    <form method="POST" action="{{ route('admin.posts.update', $post) }}">
-        @csrf
-        @method('PUT')
+    @if ($post->photos->count())
         <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary card-outline">
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach($post->photos as $photo)
+                                <div class="col-md-2">
+                                    <form method="POST" action="{{ route('admin.photos.destroy', $photo) }}">
+                                        @csrf @method('DELETE')
+                                        <button class="btn-close btn btn-danger btn-xs">
+                                            <i class="fas fa-times fa-fw"></i>
+                                        </button>
+                                        <img class="img-fluid" src="{{ url($photo->url) }}" alt="alt">
+                                    </form>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+    <form method="POST" action="{{ route('admin.posts.update', $post) }}">
+        <div class="row">
+            @csrf
+            @method('PUT')
             <div class="col-md-8">
                 <div class="card card-primary card-outline">
                     <div class="card-body">
@@ -174,6 +197,7 @@
         });
 
         CKEDITOR.replace('body');
+        CKEDITOR.config.height = 350;
 
         var myDropzone = new Dropzone('.dropzone', {
             url: '/admin/posts/{{ $post->url }}/photos',
