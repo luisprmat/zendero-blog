@@ -34,7 +34,7 @@
                                         <button class="btn-close btn btn-danger btn-xs">
                                             <i class="fas fa-times fa-fw"></i>
                                         </button>
-                                        <img class="img-fluid" src="{{ url($photo->url) }}" alt="alt">
+                                        <img class="img-fluid" src="{{ url('storage/' . $photo->url) }}" alt="alt">
                                     </form>
                                 </div>
                             @endforeach

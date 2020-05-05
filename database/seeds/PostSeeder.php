@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class PostSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
+        Storage::disk('public')->deleteDirectory('posts');
         $this->fetchRelations();
 
         $category1 = $this->categories->firstWhere('name', 'Ensayos');
