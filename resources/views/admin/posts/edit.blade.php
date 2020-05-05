@@ -104,15 +104,15 @@
                         </div>
                         <div class="form-group">
                             <label for="category">Categorías</label>
-                            <select name="category" id="category" class="select2bs4 form-control @error('category') is-invalid @enderror">
+                            <select name="category_id" id="category" class="select2bs4 form-control @error('category_id') is-invalid @enderror">
                                 <option value="">Selecciona una categoría</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
-                                        {{ old('category', $post->category_id) == $category->id ? 'selected' : '' }}
+                                        {{ old('category_id', $post->category_id) == $category->id ? 'selected' : '' }}
                                     >{{ $category->name }}</option>
                                 @endforeach
                             </select>
-                            @error('category')
+                            @error('category_id')
                                 <span class="invalid-feedback" role="alert">
                                     {{ $message }}
                                 </span>

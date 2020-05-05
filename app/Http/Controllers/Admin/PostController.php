@@ -8,6 +8,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
@@ -17,14 +18,6 @@ class PostController extends Controller
 
         return view('admin.posts.index', compact('posts'));
     }
-
-    // public function create()
-    // {
-    //     $categories = Category::all();
-    //     $tags = Tag::all();
-
-    //     return view('admin.posts.create', compact('categories', 'tags'));
-    // }
 
     public function store(Request $request)
     {
@@ -43,34 +36,11 @@ class PostController extends Controller
         return view('admin.posts.edit', compact('categories', 'tags', 'post'));
     }
 
-    public function update(Post $post, Request $request)
+    public function update(Post $post, StorePostRequest $request)
     {
-        // return $request->all();
-        $request->validate([
-            'title' => 'required',
-            'body' => 'required',
-            'category' => 'required',
-            'tags' => 'required',
-            'excerpt' => 'required'
-        ]);
+        $post->update($request->all());
 
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->iframe = $request->iframe;
-        $post->excerpt = $request->excerpt;
-        $post->published_at = $request->published_at;
-        $post->category_id = Category::find($cat = $request->category)
-                               ? $cat
-                               : Category::create(['name' => $cat])->id;
-        $post->save();
-
-        $tags = [];
-
-        foreach ($request->tags as $tag) {
-            $tags[] = Tag::find($tag) ? $tag : Tag::create(['name' => $tag])->id;
-        }
-
-        $post->tags()->sync($tags);
+        $post->syncTags($request->tags);
 
         return redirect()->route('admin.posts.edit', $post)->withFlash('Tu publicación ha sido guardada');
     }
