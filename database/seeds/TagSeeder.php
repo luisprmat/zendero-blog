@@ -13,7 +13,7 @@ class TagSeeder extends Seeder
     public function run()
     {
         factory(Tag::class)->create(['name' => 'Yosemite']);
-        factory(Tag::class)->create(['name' => 'Peak']);
+        factory(Tag::class)->create(['name' => 'Atlas Peak']);
         factory(Tag::class)->create(['name' => 'Explorer']);
     }
 }
