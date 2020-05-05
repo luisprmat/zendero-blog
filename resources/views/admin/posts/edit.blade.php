@@ -104,7 +104,7 @@
                         </div>
                         <div class="form-group">
                             <label for="category">Categorías</label>
-                            <select name="category" id="category" class="form-control @error('category') is-invalid @enderror">
+                            <select name="category" id="category" class="select2bs4 form-control @error('category') is-invalid @enderror">
                                 <option value="">Selecciona una categoría</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}"
@@ -205,7 +205,8 @@
 
         //Initialize Select2 Elements
         $('.select2bs4').select2({
-            theme: 'bootstrap4'
+            theme: 'bootstrap4',
+            tags: true
         });
 
         CKEDITOR.replace('body');
