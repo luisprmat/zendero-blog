@@ -114,6 +114,18 @@ cite .img-cite, .cite .img-cite{
 .pagination ul li{
 	margin: 0 15px;
 }
+.pagination ul li span{
+	display: block;
+    box-shadow: 0 0 10px rgba(0,0,0,.4);
+	text-decoration: none;
+	padding: 10px 15px;
+}
+
+.pagination ul li.disabled{
+    background-color: #f1f1f1;
+    color: #999;
+}
+
 .pagination ul li a{
 	display: block;
 	background: #ffffff;
