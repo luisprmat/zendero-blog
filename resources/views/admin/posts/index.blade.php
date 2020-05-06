@@ -48,8 +48,19 @@
                                     class="btn btn-secondary btn-xs"
                                     target="_blank"
                                 ><i class="fas fa-eye fa-fw"></i></a>
-                                <a href="{{ route('admin.posts.edit', $post) }}" class="btn btn-info btn-xs"><i class="fas fa-pencil-alt fa-fw"></i></a>
-                                <a href="#" class="btn btn-danger btn-xs"><i class="fas fa-times fa-fw"></i></a>
+
+                                <a href="{{ route('admin.posts.edit', $post) }}"
+                                    class="btn btn-info btn-xs"
+                                ><i class="fas fa-pencil-alt fa-fw"></i></a>
+                                <form method="POST" action="{{ route('admin.posts.destroy', $post) }}"
+                                    style="display: inline"
+                                    >
+                                    @csrf @method('DELETE')
+                                    <button href="#" class="btn btn-danger btn-xs"
+                                        onclick="return confirm('¿Estás seguro de querer eliminar esta publicación?')"
+                                    ><i class="fas fa-times fa-fw"></i>
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

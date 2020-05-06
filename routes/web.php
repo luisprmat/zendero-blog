@@ -30,6 +30,7 @@ Route::middleware('auth')
     Route::post('posts', 'PostController@store')->name('posts.store');
     Route::get('posts/{post}', 'PostController@edit')->name('posts.edit');
     Route::put('posts/{post}', 'PostController@update')->name('posts.update');
+    Route::delete('posts/{post}', 'PostController@destroy')->name('posts.destroy');
 
     Route::post('posts/{post}/photos', 'PhotoController@store')->name('posts.photos.store');
     Route::delete('photos/{photo}', 'PhotoController@destroy')->name('photos.destroy');
