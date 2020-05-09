@@ -19,17 +19,7 @@
 	<header class="space-inter">
 		<div class="container container-flex space-between">
 			<figure class="logo"><img src="/img/logo.png" alt="logo"></figure>
-			<nav class="custom-wrapper" id="menu">
-				<div class="pure-menu">
-                    <a href="#" class="custom-toggle btn-bar" id="toggle"></a>
-                </div>
-				<ul class="container-flex list-unstyled">
-					<li><a href="/" class="c-gris-2 text-uppercase active">Home</a></li>
-					<li><a href="about.html" class="c-gris-2 text-uppercase">About</a></li>
-					<li><a href="archive.html" class="c-gris-2 text-uppercase">Archive</a></li>
-					<li><a href="contact.html" class="c-gris-2 text-uppercase">Contact</a></li>
-				</ul>
-			</nav>
+            @include('partials.nav')
 		</div>
     </header>
 
@@ -42,7 +32,7 @@
 				<figure class="logo"><img src="/img/logo.png" alt=""></figure>
 				<nav>
 					<ul class="container-flex space-center list-unstyled">
-						<li><a href="index.html" class="text-uppercase c-white">home</a></li>
+						<li><a href="index.html" class="text-uppercase c-white active">home</a></li>
 						<li><a href="about.html" class="text-uppercase c-white">about</a></li>
 						<li><a href="archive.html" class="text-uppercase c-white">archive</a></li>
 						<li><a href="contact.html" class="text-uppercase c-white">contact</a></li>
@@ -62,5 +52,6 @@
 		</footer>
 	</section>
     @stack('scripts')
+    <script src="{{ asset('js/toggle-menu.js') }}"></script>
 </body>
 </html>

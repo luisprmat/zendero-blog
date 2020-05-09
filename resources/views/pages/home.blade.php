@@ -59,6 +59,3 @@
     {{ $posts->links('partials.pagination') }}
 @endsection
 
-@push('scripts')
-    <script src="{{ asset('js/toggle-menu.js') }}"></script>
-@endpush
