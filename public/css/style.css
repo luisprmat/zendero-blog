@@ -175,6 +175,9 @@ cite .img-cite, .cite .img-cite{
 	color: white;
 	text-decoration: none;
 }
+.footer footer nav ul li a.active{
+	color: #ccc;
+}
 .footer footer .social-media-footer li a{
 	display: block;
 	width: 25px;
@@ -323,12 +326,6 @@ a.btn-bar{
 .gallery-photos {
     overflow: hidden;
 }
-
-.carousel {
-    margin: 0 -15px;
-}
-
-
 
 
 

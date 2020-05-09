@@ -158,7 +158,7 @@ return [
         'address'               => 'dirección',
         'age'                   => 'edad',
         'body'                  => 'contenido',
-        'category'              => 'categoría',
+        'category_id'           => 'categoría',
         'city'                  => 'ciudad',
         'content'               => 'contenido',
         'country'               => 'país',

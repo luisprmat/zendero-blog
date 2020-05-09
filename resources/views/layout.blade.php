@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/responsive.css">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="{{ asset('js/masonry.pkgd.min.js') }}"></script>
 </head>
 <body>
 	<div class="preload"></div>
@@ -32,10 +32,7 @@
 				<figure class="logo"><img src="/img/logo.png" alt=""></figure>
 				<nav>
 					<ul class="container-flex space-center list-unstyled">
-						<li><a href="index.html" class="text-uppercase c-white active">home</a></li>
-						<li><a href="about.html" class="text-uppercase c-white">about</a></li>
-						<li><a href="archive.html" class="text-uppercase c-white">archive</a></li>
-						<li><a href="contact.html" class="text-uppercase c-white">contact</a></li>
+                        @include('partials.nav-menu')
 					</ul>
 				</nav>
 				<div class="divider-2"></div>
