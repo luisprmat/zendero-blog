@@ -6,7 +6,7 @@
 @section('content')
 <article class="post container">
     @if ($post->photos->count() === 1)
-        <figure><img src="{{ url("storage/{$post->photos->first()->url}") }}" alt="" class="img-responsive"></figure>
+        <figure><img src="{{ url("storage/{$post->photos->first()->url}") }}" alt="image" class="img-responsive"></figure>
     @elseif($post->photos->count() > 1)
         @include('posts.carousel')
     @elseif($post->iframe)
@@ -47,11 +47,11 @@
 @endsection
 
 @push('styles')
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/carousel-bootstrap.css') }}">
 @endpush
 
 @push('scripts')
     <script id="dsq-count-scr" src="//zendero.disqus.com/count.js" async></script>
-    <script src="{{ asset('js/jquery-3.5.0.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/carousel-bootstrap.js') }}"></script>
+    <script src="{{ asset('js/toggle-menu.js') }}"></script>
 @endpush

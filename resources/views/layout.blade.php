@@ -18,9 +18,11 @@
 	<div class="preload"></div>
 	<header class="space-inter">
 		<div class="container container-flex space-between">
-			<figure class="logo"><img src="/img/logo.png" alt=""></figure>
+			<figure class="logo"><img src="/img/logo.png" alt="logo"></figure>
 			<nav class="custom-wrapper" id="menu">
-				<div class="pure-menu"></div>
+				<div class="pure-menu">
+                    <a href="#" class="custom-toggle btn-bar" id="toggle"></a>
+                </div>
 				<ul class="container-flex list-unstyled">
 					<li><a href="/" class="c-gris-2 text-uppercase active">Home</a></li>
 					<li><a href="about.html" class="c-gris-2 text-uppercase">About</a></li>
