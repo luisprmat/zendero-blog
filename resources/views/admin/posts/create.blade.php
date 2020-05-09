@@ -1,6 +1,5 @@
-
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form method="POST" action="{{ route('admin.posts.store') }}">
+    <form method="POST" action="{{ route('admin.posts.store', '#create') }}">
         @csrf
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -12,11 +11,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        {{-- <label for="title">Título de la publicación</label> --}}
+                        {{-- <label for="post-title">Título de la publicación</label> --}}
                         <input type="text" name="title"
-                            id="title" class="form-control @error('title') is-invalid @enderror"
+                            id="post-title" class="form-control @error('title') is-invalid @enderror"
                             placeholder="Ingresa aquí el título de la publicación"
                             value="{{ old('title') }}"
+                            autofocus
                             required
                         >
                         @error('title')
@@ -34,3 +34,22 @@
         </div>
     </form>
 </div>
+
+@push('my_scripts')
+    <script>
+        const modalCreate = $('#exampleModal')
+
+        if (window.location.hash === '#create') {
+            modalCreate.modal('show');
+        }
+
+        modalCreate.on('hide.bs.modal', () => {
+            window.location.hash = '#';
+        });
+
+        modalCreate.on('shown.bs.modal', () => {
+            $('#post-title').focus();
+            window.location.hash = '#create';
+        });
+    </script>
+@endpush

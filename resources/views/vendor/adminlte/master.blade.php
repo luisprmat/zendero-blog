@@ -65,8 +65,10 @@
 @else
 <script src="{{ mix('js/app.js') }}"></script>
 @endif
+@unless (request()->is('admin/posts/*'))
+    @include('admin.posts.create')
+@endunless
 @stack('my_scripts') {{-- My scripts--}}
 @yield('load_js')
-@include('admin.posts.create')
 </body>
 </html>

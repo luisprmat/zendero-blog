@@ -244,22 +244,16 @@ return [
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
         [
+            'key'     => 'blog-menu',
             'text'    => 'Blog',
             'icon'    => 'fas fa-fw fa-bars',
+            'active'  => 'admin/posts*',
             'submenu' => [
                 [
+                    'key' => 'view-posts',
                     'text' => 'Ver todos los posts',
                     'icon' => 'fas fa-fw fa-eye',
                     'route'  => 'admin.posts.index',
-                ],
-                [
-                    'text' => 'Crear un post',
-                    'icon' => 'fas fa-fw fa-pencil-alt',
-                    'url'  => '#',
-                    'data' => [
-                        'toggle' => 'modal',
-                        'target' => '#exampleModal'
-                    ]
                 ],
                 // [
                 //     'text'    => 'level_one',
