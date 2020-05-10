@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Post;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -40,5 +41,10 @@ class User extends Authenticatable
     public function adminlte_image()
     {
         return asset('img/default-user.png');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 }

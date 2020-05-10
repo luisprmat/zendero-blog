@@ -15,18 +15,18 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->truncateTables([
-            'users',
             'post_tag',
             'tags',
             'posts',
-            'categories'
+            'categories',
+            'users',
         ]);
 
         $this->call([
+            UserSeeder::class,
             TagSeeder::class,
             CategorySeeder::class,
             PostSeeder::class,
-            UserSeeder::class
         ]);
     }
 

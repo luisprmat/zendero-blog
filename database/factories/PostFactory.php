@@ -3,6 +3,7 @@
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use App\Models\Post;
+use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
@@ -11,6 +12,6 @@ $factory->define(Post::class, function (Faker $faker) {
         'url' => $faker->slug,
         'excerpt' => $faker->paragraph,
         'body' => "<p>$faker->text</p>",
-        'published_at' => now()
+        'published_at' => now(),
     ];
 });
