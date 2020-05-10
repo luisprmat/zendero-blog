@@ -14,34 +14,37 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = auth()->user()->posts;
 
         return view('admin.posts.index', compact('posts'));
     }
 
     public function store(Request $request)
     {
+        $this->authorize('create', Post::class);
+
         $request->validate(['title' => 'required|min:3']);
 
-        // $post = Post::create($request->only('title'));
-        $post = Post::create([
-            'title' => $request->title,
-            'user_id' => auth()->id()
-        ]);
+        $post = Post::create($request->all());
 
         return redirect()->route('admin.posts.edit', $post);
     }
 
     public function edit(Post $post)
     {
-        $categories = Category::all();
-        $tags = Tag::all();
+        $this->authorize('update', $post);
 
-        return view('admin.posts.edit', compact('categories', 'tags', 'post'));
+        return view('admin.posts.edit', [
+            'post' => $post,
+            'tags' => Tag::all(),
+            'categories' => Category::all()
+        ]);
     }
 
     public function update(Post $post, StorePostRequest $request)
     {
+        $this->authorize('update', $post);
+
         $post->update($request->all());
 
         $post->syncTags($request->tags);
@@ -51,6 +54,8 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+
         $post->delete();
 
         return redirect()->route('admin.posts.index')->withFlash('Tu publicación ha sido eliminada');

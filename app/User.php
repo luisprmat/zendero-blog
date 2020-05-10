@@ -43,6 +43,11 @@ class User extends Authenticatable
         return asset('img/default-user.png');
     }
 
+    public function adminlte_desc()
+    {
+        return "Desde {$this->created_at->format('d/m/Y')}";
+    }
+
     public function posts()
     {
         return $this->hasMany(Post::class);
