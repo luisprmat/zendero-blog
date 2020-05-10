@@ -6,6 +6,7 @@ use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
+use Bouncer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -53,5 +54,12 @@ class AppServiceProvider extends ServiceProvider
                 $event->menu->addIn('blog-menu', $isIndex);
             }
         });
+
+        Bouncer::tables([
+            'abilities' => 'bouncer_abilities',
+            'permissions' => 'bouncer_permissions',
+            'roles' => 'bouncer_roles',
+            'assigned_roles' => 'bouncer_assigned_roles'
+        ]);
     }
 }
