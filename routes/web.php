@@ -30,12 +30,9 @@ Route::middleware('auth')
     ->group(function()
 {
     Route::get('/', 'AdminController@index')->name('dashboard');
-    Route::get('posts', 'PostController@index')->name('posts.index');
-    Route::get('posts/create', 'PostController@create')->name('posts.create');
-    Route::post('posts', 'PostController@store')->name('posts.store');
-    Route::get('posts/{post}', 'PostController@edit')->name('posts.edit');
-    Route::put('posts/{post}', 'PostController@update')->name('posts.update');
-    Route::delete('posts/{post}', 'PostController@destroy')->name('posts.destroy');
+
+    Route::resource('posts', 'PostController')->except('show');
+    Route::resource('users', 'UserController');
 
     Route::post('posts/{post}/photos', 'PhotoController@store')->name('posts.photos.store');
     Route::delete('photos/{photo}', 'PhotoController@destroy')->name('photos.destroy');

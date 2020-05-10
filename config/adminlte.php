@@ -247,7 +247,7 @@ return [
             'key'     => 'blog-menu',
             'text'    => 'Blog',
             'icon'    => 'fas fa-fw fa-bars',
-            'active'  => 'admin/posts*',
+            // 'active'  => 'admin/posts/*',
             'submenu' => [
                 [
                     'key' => 'view-posts',
