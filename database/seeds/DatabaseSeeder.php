@@ -19,10 +19,15 @@ class DatabaseSeeder extends Seeder
             'tags',
             'posts',
             'categories',
+            'bouncer_assigned_roles',
+            'bouncer_permissions',
             'users',
+            'bouncer_abilities',
+            'bouncer_roles'
         ]);
 
         $this->call([
+            BouncerSeeder::class,
             UserSeeder::class,
             TagSeeder::class,
             CategorySeeder::class,

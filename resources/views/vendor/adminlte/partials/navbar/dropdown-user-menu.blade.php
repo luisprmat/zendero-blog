@@ -36,7 +36,10 @@
                          alt="{{ Auth::user()->name }}">
                 @endif
                 <p class="@if(!config('adminlte.usermenu_image')) mt-0 @endif">
-                    {{ Auth::user()->name }}
+                    <strong>{{ Auth::user()->name }}</strong>
+                    @if (Auth::user()->hasRoles())
+                        - {{ Auth::user()->roles()->first()->title }}
+                    @endif
                     @if(config('adminlte.usermenu_desc'))
                         <small>{{ Auth::user()->adminlte_desc() }}</small>
                     @endif

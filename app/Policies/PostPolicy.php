@@ -10,6 +10,13 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
+    public function before(User $user)
+    {
+        if ($user->isAn('admin')) {
+            return true;
+        }
+    }
+
     /**
      * Determine whether the user can view any models.
      *
@@ -30,7 +37,8 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id
+            || $user->can('view-posts');
     }
 
     /**
@@ -41,7 +49,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return true;
+        return $user->can('create-posts');
     }
 
     /**
@@ -53,7 +61,8 @@ class PostPolicy
      */
     public function update(User $user, Post $post)
     {
-        return $user->id == $post->user_id;
+        return $user->id == $post->user_id
+            || $user->can('update-posts');
     }
 
     /**
@@ -65,7 +74,8 @@ class PostPolicy
      */
     public function delete(User $user, Post $post)
     {
-        return $user->id === $post->user_id;
+        return $user->id === $post->user_id
+            || $user->can('delete-posts');
     }
 
     /**
