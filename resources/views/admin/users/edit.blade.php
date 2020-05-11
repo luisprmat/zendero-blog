@@ -93,5 +93,34 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">Roles y permisos</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('admin.users.roles.update', $user) }}">
+                        @csrf @method('PUT')
+                        <div class="form-group">
+                            @foreach ($roles as $role)
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox"
+                                        name="roles[]"
+                                        class="custom-control-input"
+                                        id="role_{{ $role->id }}"
+                                        value="{{ $role->id }}"
+                                        {{ $user->roles->contains($role->id) ? 'checked' : '' }}
+                                    >
+                                    <label class="custom-control-label" for="role_{{ $role->id }}">
+                                        {{ $role->title }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="btn btn-primary btn-block">Actualizar roles</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

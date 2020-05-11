@@ -34,6 +34,8 @@ Route::middleware('auth')
     Route::resource('posts', 'PostController')->except('show');
     Route::resource('users', 'UserController');
 
+    Route::put('users/{user}/roles', 'UserRolesController@update')->name('users.roles.update');
+
     Route::post('posts/{post}/photos', 'PhotoController@store')->name('posts.photos.store');
     Route::delete('photos/{photo}', 'PhotoController@destroy')->name('photos.destroy');
 });
