@@ -37,6 +37,7 @@
                     @endif
                     <form method="POST" action="{{ route('admin.users.update', $user) }}">
                         @csrf @method('PUT')
+
                         <div class="form-group">
                             <label for="name">Nombre:</label>
                             <input name="name" id="name" value="{{ old('name', $user->name) }}"
@@ -49,11 +50,12 @@
                                 </span>
                             @enderror
                         </div>
+
                         <div class="form-group">
                             <label for="email">Email:</label>
-                            <input name="email" id="email" value="{{ old('email', $user->email) }}"
+                            <input type="email" name="email" id="email" value="{{ old('email', $user->email) }}"
                                 class="form-control @error('email') is-invalid @enderror"
-                                placeholder="Nombre"
+                                placeholder="Correo electrónico"
                             >
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
@@ -61,6 +63,31 @@
                                 </span>
                             @enderror
                         </div>
+
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" name="password" id="password"
+                                class="form-control @error('password') is-invalid @enderror"
+                                placeholder="Contraseña"
+                            >
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+                            <small class="text-muted">
+                                Dejar en blanco si no quiere cambiar la contraseña
+                            </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password_confirmation">Repita la contraseña:</label>
+                            <input type="password" name="password_confirmation" id="password_confirmation"
+                                class="form-control"
+                                placeholder="Repita la contraseña"
+                            >
+                        </div>
+
                         <button class="btn btn-primary btn-block">Actualizar usuario</button>
                     </form>
                 </div>
