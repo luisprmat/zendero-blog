@@ -164,7 +164,8 @@
 
 @push('my_scripts')
     <script src="/adminlte/plugins/dropzone/dropzone.js"></script>
-    <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    {{-- <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script> --}}
+    <script src="/adminlte/plugins/ckeditor/ckeditor.js"></script>
     {{-- <script src="/adminlte/plugins/moment/moment.min.js"></script> --}}
     <script src="/adminlte/plugins/select2/js/select2.full.min.js"></script>
     {{-- <script src="/adminlte/plugins/daterangepicker/daterangepicker.js"></script> --}}
