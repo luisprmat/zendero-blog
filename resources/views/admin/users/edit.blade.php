@@ -12,7 +12,7 @@
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}"><i class="fas fa-user fa-fw"></i> Listado</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.users.index') }}"><i class="fas fa-users fa-fw"></i> Listado</a></li>
                 <li class="breadcrumb-item active">Editar usuario</li>
             </ol>
         </div>
@@ -112,7 +112,10 @@
                                         {{ $user->roles->contains($role->id) ? 'checked' : '' }}
                                     >
                                     <label class="custom-control-label" for="role_{{ $role->id }}">
-                                        {{ $role->title }}
+                                        {{ $role->title }} <br>
+                                        <small class="text-muted">
+                                            {{ $role->abilities->pluck('title')->implode(', ') }}
+                                        </small>
                                     </label>
                                 </div>
                             @endforeach

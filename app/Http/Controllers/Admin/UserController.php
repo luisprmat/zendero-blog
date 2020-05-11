@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Bouncer;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
+use Silber\Bouncer\Database\Ability;
+use Silber\Bouncer\Database\Role;
 
 class UserController extends Controller
 {
@@ -29,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.users.create');
     }
 
     /**
@@ -62,8 +63,8 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $roles = Bouncer::role()->all();
-        $abilities = Bouncer::ability()->all();
+        $roles = Role::with('abilities')->get();
+        $abilities = Ability::all();
 
         return view('admin.users.edit', compact('user', 'roles', 'abilities'));
     }

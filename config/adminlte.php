@@ -255,30 +255,26 @@ return [
                     'icon' => 'fas fa-fw fa-eye',
                     'route'  => 'admin.posts.index',
                 ],
-                // [
-                //     'text'    => 'level_one',
-                //     'url'     => '#',
-                //     'submenu' => [
-                //         [
-                //             'text' => 'level_two',
-                //             'url'  => '#',
-                //         ],
-                //         [
-                //             'text'    => 'level_two',
-                //             'url'     => '#',
-                //             'submenu' => [
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url'  => '#',
-                //                 ],
-                //                 [
-                //                     'text' => 'level_three',
-                //                     'url'  => '#',
-                //                 ],
-                //             ],
-                //         ],
-                //     ],
-                // ],
+            ],
+        ],
+        [
+            'key'     => 'user-menu',
+            'text'    => 'Usuarios',
+            'icon'    => 'fas fa-fw fa-users',
+            // 'active'  => 'admin/posts/*',
+            'submenu' => [
+                [
+                    'key' => 'view-users',
+                    'text' => 'Ver todos los usuarios',
+                    'icon' => 'fas fa-fw fa-eye',
+                    'route'  => 'admin.users.index',
+                ],
+                [
+                    'key' => 'create-user',
+                    'text' => 'Crear un usuario',
+                    'icon' => 'fas fa-fw fa-pencil-alt',
+                    'route'  => 'admin.users.create',
+                ],
             ],
         ],
         // ['header' => 'labels'],
