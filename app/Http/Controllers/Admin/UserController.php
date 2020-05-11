@@ -63,8 +63,9 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $roles = Bouncer::role()->all();
+        $abilities = Bouncer::ability()->all();
 
-        return view('admin.users.edit', compact('user', 'roles'));
+        return view('admin.users.edit', compact('user', 'roles', 'abilities'));
     }
 
     /**

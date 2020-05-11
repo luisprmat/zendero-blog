@@ -96,7 +96,7 @@
         <div class="col-md-6">
             <div class="card card-primary card-outline">
                 <div class="card-header">
-                    <h3 class="card-title">Roles y permisos</h3>
+                    <h3 class="card-title">Roles</h3>
                 </div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('admin.users.roles.update', $user) }}">
@@ -118,6 +118,33 @@
                             @endforeach
                         </div>
                         <button class="btn btn-primary btn-block">Actualizar roles</button>
+                    </form>
+                </div>
+            </div>
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">Permisos</h3>
+                </div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('admin.users.abilities.update', $user) }}">
+                        @csrf @method('PUT')
+                        <div class="form-group">
+                            @foreach ($abilities as $ability)
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox"
+                                        name="abilities[]"
+                                        class="custom-control-input"
+                                        id="ability_{{ $ability->id }}"
+                                        value="{{ $ability->id }}"
+                                        {{ $user->abilities->contains($ability->id) ? 'checked' : '' }}
+                                    >
+                                    <label class="custom-control-label" for="ability_{{ $ability->id }}">
+                                        {{ $ability->title }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="btn btn-primary btn-block">Actualizar permisos</button>
                     </form>
                 </div>
             </div>
