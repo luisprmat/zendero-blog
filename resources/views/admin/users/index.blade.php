@@ -23,7 +23,9 @@
 <div class="card card-primary card-outline">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h3 class="card-title">Todas las publicaciones</h3>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus fa-fw"></i> Crear usuario</button>
+        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
+            <i class="fas fa-plus fa-fw"></i> Crear usuario
+        </a>
     </div>
     <!-- /.card-header -->
     <div class="card-body">

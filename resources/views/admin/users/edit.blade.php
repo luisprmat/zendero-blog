@@ -102,23 +102,7 @@
                     <form method="POST" action="{{ route('admin.users.roles.update', $user) }}">
                         @csrf @method('PUT')
                         <div class="form-group">
-                            @foreach ($roles as $role)
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox"
-                                        name="roles[]"
-                                        class="custom-control-input"
-                                        id="role_{{ $role->id }}"
-                                        value="{{ $role->id }}"
-                                        {{ $user->roles->contains($role->id) ? 'checked' : '' }}
-                                    >
-                                    <label class="custom-control-label" for="role_{{ $role->id }}">
-                                        {{ $role->title }} <br>
-                                        <small class="text-muted">
-                                            {{ $role->abilities->pluck('title')->implode(', ') }}
-                                        </small>
-                                    </label>
-                                </div>
-                            @endforeach
+                            @include('admin.roles.checkboxes')
                         </div>
                         <button class="btn btn-primary btn-block">Actualizar roles</button>
                     </form>
@@ -132,20 +116,7 @@
                     <form method="POST" action="{{ route('admin.users.abilities.update', $user) }}">
                         @csrf @method('PUT')
                         <div class="form-group">
-                            @foreach ($abilities as $ability)
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox"
-                                        name="abilities[]"
-                                        class="custom-control-input"
-                                        id="ability_{{ $ability->id }}"
-                                        value="{{ $ability->id }}"
-                                        {{ $user->abilities->contains($ability->id) ? 'checked' : '' }}
-                                    >
-                                    <label class="custom-control-label" for="ability_{{ $ability->id }}">
-                                        {{ $ability->title }}
-                                    </label>
-                                </div>
-                            @endforeach
+                            @include('admin.abilities.checkboxes')
                         </div>
                         <button class="btn btn-primary btn-block">Actualizar permisos</button>
                     </form>

@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\UpdateUserRequest;
-use Silber\Bouncer\Database\Ability;
+use App\Events\UserWasCreated;
 use Silber\Bouncer\Database\Role;
+use App\Http\Controllers\Controller;
+use Silber\Bouncer\Database\Ability;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -30,7 +32,11 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles = Role::with('abilities')->get();
+        $abilities = Ability::all();
+        $user = new User;
+
+        return view('admin.users.create', compact('user', 'roles', 'abilities'));
     }
 
     /**
@@ -41,7 +47,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
+
+        $data['password'] = Str::random(8);
+
+        $user = User::create($data);
+
+        if ($request->filled('roles')) {
+            $user->roles()->attach($request->roles);
+        }
+
+        if ($request->filled('abilities')) {
+            $user->abilities()->attach($request->abilities);
+        }
+
+        // Enviar email con la contraseña
+        UserWasCreated::dispatch($user, $data['password']);
+
+        return redirect()->route('admin.users.index')->withFlash('El usuario ha sido creado');
     }
 
     /**
