@@ -31,12 +31,13 @@ class BouncerSeeder extends Seeder
 
     protected function createAbilities()
     {
-        // Bouncer::ability()->create([
-        //     'name' => '*',
-        //     'title' => 'Todas las habilidades',
-        //     'entity_type' => '*'
-        // ]);
+        Bouncer::ability()->create([
+            'name' => '*',
+            'title' => 'Todas las habilidades',
+            'entity_type' => '*'
+        ]);
 
+        // Post abilities
         Bouncer::ability()->create([
             'name' => 'view-posts',
             'title' => 'Ver publicaciones',
@@ -55,6 +56,27 @@ class BouncerSeeder extends Seeder
         Bouncer::ability()->create([
             'name' => 'delete-posts',
             'title' => 'Eliminar publicaciones',
+        ]);
+
+        // User abilities
+        Bouncer::ability()->create([
+            'name' => 'view-users',
+            'title' => 'Ver usuarios',
+        ]);
+
+        Bouncer::ability()->create([
+            'name' => 'create-users',
+            'title' => 'Crear usuarios',
+        ]);
+
+        Bouncer::ability()->create([
+            'name' => 'update-users',
+            'title' => 'Actualizar usuarios',
+        ]);
+
+        Bouncer::ability()->create([
+            'name' => 'delete-users',
+            'title' => 'Eliminar usuarios',
         ]);
      }
 }

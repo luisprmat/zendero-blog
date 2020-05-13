@@ -60,6 +60,15 @@ class User extends Authenticatable
         return $this->hasMany(Post::class);
     }
 
+    public function scopeAllowed($query)
+    {
+        if(auth()->user()->can('view', $this)) {
+            return $query;
+        }
+
+        return $query->where('id', auth()->id());
+    }
+
     public function hasRoles()
     {
         return (bool) $this->roles->count();
