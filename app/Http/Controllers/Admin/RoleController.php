@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Silber\Bouncer\Database\Role;
 use App\Http\Controllers\Controller;
 use Silber\Bouncer\Database\Ability;
+use App\Http\Requests\SaveRolesRequest;
 
 class RoleController extends Controller
 {
@@ -41,14 +42,9 @@ class RoleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SaveRolesRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required|unique:bouncer_roles',
-            'title' => 'required'
-        ]);
-
-        $role = Bouncer::role()->create($data);
+        $role = Bouncer::role()->create($request->validated());
 
         if ($request->has('abilities')) {
             $role->abilities()->attach($request->abilities);
@@ -89,14 +85,9 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Role $role)
+    public function update(SaveRolesRequest $request, Role $role)
     {
-        $data = $request->validate([
-            'name' => 'required|unique:bouncer_roles,name,' . $role->id,
-            'title' => 'required'
-        ]);
-
-        $role->update($data);
+        $role->update($request->validated());
 
         $role->abilities()->detach();
 

@@ -36,6 +36,7 @@
                         <th>ID</th>
                         <th>rol</th>
                         <th>Nombre</th>
+                        <th>Permisos</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -45,6 +46,7 @@
                             <td>{{ $role->id }}</td>
                             <td>{{ $role->name }}</td>
                             <td>{{ $role->title }}</td>
+                            <td>{{ $role->abilities->pluck('title')->implode(', ') }}</td>
                             <td>
                                 <a href="{{ route('admin.roles.show', $role) }}"
                                     class="btn btn-secondary btn-xs"

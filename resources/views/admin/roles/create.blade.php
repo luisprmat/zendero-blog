@@ -29,41 +29,7 @@
                 <div class="card-body">
                     @include('partials.error-messages')
                     <form method="POST" action="{{ route('admin.roles.store') }}">
-                        @csrf
-
-                        <div class="form-group">
-                            <label for="name">rol</label>
-                            <input name="name" id="name" value="{{ old('name') }}"
-                                class="form-control @error('name') is-invalid @enderror"
-                                placeholder="nombre-del-rol"
-                            >
-                            @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="title">Nombre</label>
-                            <input name="title" id="title" value="{{ old('title') }}"
-                                class="form-control @error('title') is-invalid @enderror"
-                                placeholder="Nombre del rol"
-                            >
-                            @error('title')
-                                <span class="invalid-feedback" role="alert">
-                                    {{ $message }}
-                                </span>
-                            @enderror
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label>Permisos</label>
-                                @include('admin.abilities.checkboxes', ['model' => $role])
-                            </div>
-                        </div>
-
+                        @include('admin.roles.form')
                         <button class="btn btn-primary btn-block">Crear rol</button>
                     </form>
                 </div>
