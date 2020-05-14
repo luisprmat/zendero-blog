@@ -99,13 +99,23 @@
                     <h3 class="card-title">Roles</h3>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.users.roles.update', $user) }}">
-                        @csrf @method('PUT')
-                        <div class="form-group">
-                            @include('admin.roles.checkboxes')
-                        </div>
-                        <button class="btn btn-primary btn-block">Actualizar roles</button>
-                    </form>
+                    @if (auth()->user()->isAn('admin'))
+                        <form method="POST" action="{{ route('admin.users.roles.update', $user) }}">
+                            @csrf @method('PUT')
+                            <div class="form-group">
+                                @include('admin.roles.checkboxes')
+                            </div>
+                            <button class="btn btn-primary btn-block">Actualizar roles</button>
+                        </form>
+                    @else
+                        <ul class="list-group">
+                            @forelse ($user->roles as $role)
+                                <li class="list-group-item">{{ $role->title }}</li>
+                            @empty
+                                <li class="list-group-item"><i>No tiene roles</i></li>
+                            @endforelse
+                        </ul>
+                    @endif
                 </div>
             </div>
             <div class="card card-primary card-outline">
@@ -113,13 +123,23 @@
                     <h3 class="card-title">Permisos</h3>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('admin.users.abilities.update', $user) }}">
-                        @csrf @method('PUT')
-                        <div class="form-group">
-                            @include('admin.abilities.checkboxes')
-                        </div>
-                        <button class="btn btn-primary btn-block">Actualizar permisos</button>
-                    </form>
+                    @if (auth()->user()->isAn('admin'))
+                        <form method="POST" action="{{ route('admin.users.abilities.update', $user) }}">
+                            @csrf @method('PUT')
+                            <div class="form-group">
+                                @include('admin.abilities.checkboxes')
+                            </div>
+                            <button class="btn btn-primary btn-block">Actualizar permisos</button>
+                        </form>
+                    @else
+                        <ul class="list-group">
+                            @forelse ($user->abilities as $ability)
+                                <li class="list-group-item">{{ $ability->title }}</li>
+                            @empty
+                                <li class="list-group-item"><i>No tiene permisos</i></li>
+                            @endforelse
+                        </ul>
+                    @endif
                 </div>
             </div>
         </div>

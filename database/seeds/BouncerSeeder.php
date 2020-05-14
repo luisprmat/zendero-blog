@@ -78,5 +78,10 @@ class BouncerSeeder extends Seeder
             'name' => 'delete-users',
             'title' => 'Eliminar usuarios',
         ]);
+
+        Bouncer::ability()->create([
+            'name' => 'update-roles',
+            'title' => 'Actualizar roles',
+        ]);
      }
 }

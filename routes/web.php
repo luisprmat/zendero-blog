@@ -32,8 +32,12 @@ Route::middleware('auth')
     Route::resource('posts', 'PostController')->except('show');
     Route::resource('users', 'UserController');
 
-    Route::put('users/{user}/roles', 'UserRolesController@update')->name('users.roles.update');
-    Route::put('users/{user}/abilities', 'UserAbilitiesController@update')->name('users.abilities.update');
+    Route::put('users/{user}/roles', 'UserRolesController@update')
+        ->middleware('can:manage-roles-and-abilities')
+        ->name('users.roles.update');
+    Route::put('users/{user}/abilities', 'UserAbilitiesController@update')
+        ->middleware('can:manage-roles-and-abilities')
+        ->name('users.abilities.update');
 
     Route::post('posts/{post}/photos', 'PhotoController@store')->name('posts.photos.store');
     Route::delete('photos/{photo}', 'PhotoController@destroy')->name('photos.destroy');
