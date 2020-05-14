@@ -27,14 +27,7 @@
                     <h3 class="card-title">Datos personales</h3>
                 </div>
                 <div class="card-body">
-                    @if ($errors->any())
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <strong>¡Hey!</strong> revisa los campos donde hay errores
-                        </div>
-                    @endif
+                    @include('partials.error-messages')
                     <form method="POST" action="{{ route('admin.users.update', $user) }}">
                         @csrf @method('PUT')
 
@@ -127,7 +120,7 @@
                         <form method="POST" action="{{ route('admin.users.abilities.update', $user) }}">
                             @csrf @method('PUT')
                             <div class="form-group">
-                                @include('admin.abilities.checkboxes')
+                                @include('admin.abilities.checkboxes', ['model' => $user])
                             </div>
                             <button class="btn btn-primary btn-block">Actualizar permisos</button>
                         </form>

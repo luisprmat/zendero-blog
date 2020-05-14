@@ -5,7 +5,9 @@
             class="custom-control-input"
             id="ability_{{ $ability->id }}"
             value="{{ $ability->id }}"
-            {{ $user->abilities->contains($ability->id) ? 'checked' : '' }}
+            {{ $model->abilities->contains($ability->id) || collect(old('abilities'))->contains($ability->id)
+                ? 'checked'
+                : '' }}
         >
         <label class="custom-control-label" for="ability_{{ $ability->id }}">
             {{ $ability->title }}
