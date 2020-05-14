@@ -4,7 +4,12 @@
 	}
   .post .content-post{
 	padding: 25px;
-	}
+  }
+  .page-archive,
+  .page-about,
+  .page-contact{
+    padding: 25px;
+  }
 	.content-post{
 		position: static !important;
 	}
@@ -16,9 +21,9 @@
 		top: 0;
 	}
   .post h1, .post h2{
-	font-size: 28px;
-	line-height: 1.2;
-	color: #000000;
+    font-size: 28px;
+    line-height: 1.2;
+    color: #000000;
 	}
 	.read-more, .tags{
 		display: block;
@@ -60,18 +65,16 @@
 		margin: 15px 0;
 	}
 
-    nav a.btn-bar {
+  nav a.btn-bar {
+    background: url('../img/nav-icon.png') no-repeat !important;
+  }
 
-        background: url('../img/nav-icon.png') no-repeat !important;
+  .custom-menu-3 {
+    text-align: left;
+  }
 
-    }
-
-    .custom-menu-3 {
-              text-align: left;
-          }
-
-          .custom-toggle {
-              display: block;
-          }
+  .custom-toggle {
+      display: block;
+  }
 
 }
