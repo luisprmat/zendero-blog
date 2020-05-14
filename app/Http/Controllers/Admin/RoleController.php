@@ -8,6 +8,7 @@ use Silber\Bouncer\Database\Role;
 use App\Http\Controllers\Controller;
 use Silber\Bouncer\Database\Ability;
 use App\Http\Requests\SaveRolesRequest;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class RoleController extends Controller
 {
@@ -104,8 +105,16 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        //
+        if ($role->id === 1) {
+            throw new AuthorizationException('No se puede eliminar este rol');
+        }
+
+        // $this->authorize('delete', $role)
+
+        $role->delete();
+
+        return redirect()->route('admin.roles.index')->withFlash('El rol fue eliminado');
     }
 }
