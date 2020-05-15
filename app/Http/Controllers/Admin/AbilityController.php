@@ -10,6 +10,8 @@ class AbilityController extends Controller
 {
     public function index()
     {
+        $this->authorize('view', new Ability);
+
         return view('admin.abilities.index', [
             'abilities' => Ability::all()
         ]);
@@ -17,6 +19,8 @@ class AbilityController extends Controller
 
     public function edit(Ability $ability)
     {
+        $this->authorize('update', $ability);
+
         return view('admin.abilities.edit', [
             'ability' => $ability
         ]);
@@ -24,6 +28,8 @@ class AbilityController extends Controller
 
     public function update(Request $request, Ability $ability)
     {
+        $this->authorize('update', $ability);
+
         $data = $request->validate(['title' => 'required']);
 
         $ability->update($data);

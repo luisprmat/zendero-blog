@@ -100,5 +100,15 @@ class BouncerSeeder extends Seeder
             'title' => 'Eliminar roles',
         ]);
 
+        // Ability abilities
+        Bouncer::ability()->create([
+            'name' => 'view-abilities',
+            'title' => 'Ver permisos',
+        ]);
+
+        Bouncer::ability()->create([
+            'name' => 'update-abilities',
+            'title' => 'Actualizar permisos',
+        ]);
      }
 }
