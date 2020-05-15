@@ -31,9 +31,11 @@ class RoleController extends Controller
      */
     public function create()
     {
+        $this->authorize('update', $role = new Role);
+
         return view('admin.roles.create', [
             'abilities' => Ability::all(),
-            'role' => new Role
+            'role' => $role
         ]);
     }
 
@@ -45,6 +47,8 @@ class RoleController extends Controller
      */
     public function store(SaveRolesRequest $request)
     {
+        $this->authorize('create', new Role);
+
         $role = Bouncer::role()->create($request->validated());
 
         if ($request->has('abilities')) {
@@ -55,17 +59,6 @@ class RoleController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -73,6 +66,8 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        $this->authorize('update', $role);
+
         return view('admin.roles.edit', [
             'role' => $role,
             'abilities' => Ability::all()
@@ -88,6 +83,8 @@ class RoleController extends Controller
      */
     public function update(SaveRolesRequest $request, Role $role)
     {
+        $this->authorize('update', $role);
+
         $role->update($request->validated());
 
         $role->abilities()->detach();
@@ -107,11 +104,7 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        if ($role->id === 1) {
-            throw new AuthorizationException('No se puede eliminar este rol');
-        }
-
-        // $this->authorize('delete', $role)
+        $this->authorize('delete', $role);
 
         $role->delete();
 

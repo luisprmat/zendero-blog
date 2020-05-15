@@ -48,22 +48,20 @@
                             <td>{{ $role->title }}</td>
                             <td>{{ $role->abilities->pluck('title')->implode(', ') }}</td>
                             <td>
-                                <a href="{{ route('admin.roles.show', $role) }}"
-                                    class="btn btn-secondary btn-xs"
-                                ><i class="fas fa-eye fa-fw"></i></a>
-
                                 <a href="{{ route('admin.roles.edit', $role) }}"
                                     class="btn btn-info btn-xs"
                                 ><i class="fas fa-pencil-alt fa-fw"></i></a>
-                                <form method="POST" action="{{ route('admin.roles.destroy', $role) }}"
-                                    style="display: inline"
-                                    >
-                                    @csrf @method('DELETE')
-                                    <button href="#" class="btn btn-danger btn-xs"
-                                        onclick="return confirm('¿Estás seguro de querer eliminar este rol?')"
-                                    ><i class="fas fa-times fa-fw"></i>
-                                    </button>
-                                </form>
+                                @if ($role->name !== 'admin')
+                                    <form method="POST" action="{{ route('admin.roles.destroy', $role) }}"
+                                        style="display: inline"
+                                        >
+                                        @csrf @method('DELETE')
+                                        <button href="#" class="btn btn-danger btn-xs"
+                                            onclick="return confirm('¿Estás seguro de querer eliminar este rol?')"
+                                        ><i class="fas fa-times fa-fw"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

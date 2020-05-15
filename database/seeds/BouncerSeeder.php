@@ -79,9 +79,26 @@ class BouncerSeeder extends Seeder
             'title' => 'Eliminar usuarios',
         ]);
 
+        // Role abilities
+        Bouncer::ability()->create([
+            'name' => 'view-roles',
+            'title' => 'Ver roles',
+        ]);
+
+        Bouncer::ability()->create([
+            'name' => 'create-roles',
+            'title' => 'Crear roles',
+        ]);
+
         Bouncer::ability()->create([
             'name' => 'update-roles',
             'title' => 'Actualizar roles',
         ]);
+
+        Bouncer::ability()->create([
+            'name' => 'delete-roles',
+            'title' => 'Eliminar roles',
+        ]);
+
      }
 }
