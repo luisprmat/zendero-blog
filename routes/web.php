@@ -32,6 +32,7 @@ Route::middleware('auth')
     Route::resource('posts', 'PostController')->except('show');
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController')->except('show');
+    Route::resource('abilities', 'AbilityController')->only(['index', 'edit', 'update']);
 
     Route::put('users/{user}/roles', 'UserRolesController@update')
         ->middleware('can:manage-roles-and-abilities')

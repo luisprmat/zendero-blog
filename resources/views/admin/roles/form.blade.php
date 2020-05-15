@@ -3,10 +3,7 @@
 <div class="form-group">
     <label for="name">identificador del rol</label>
     @if (Silber\Bouncer\Database\Role::where('name', $role->name)->exists() )
-        <input id="name" value="{{ $role->name }}"
-            class="form-control @error('name') is-invalid @enderror"
-            disabled
-        >
+        <input id="name" value="{{ $role->name }}" class="form-control" disabled>
     @else
         <input id="name" name="name" value="{{ old('name', $role->name) }}"
             class="form-control @error('name') is-invalid @enderror"
