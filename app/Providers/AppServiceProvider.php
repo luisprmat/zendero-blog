@@ -2,11 +2,12 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Events\Dispatcher;
+use DB;
+use Bouncer;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Contracts\Events\Dispatcher;
 use JeroenNoten\LaravelAdminLte\Events\BuildingMenu;
-use Bouncer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Dispatcher $events)
     {
+        DB::statement("SET lc_time_names = 'es_ES'");
+
         $menuButton = [
             'text'  => 'Crear un post',
             'icon'  => 'fas fa-fw fa-pencil-alt',

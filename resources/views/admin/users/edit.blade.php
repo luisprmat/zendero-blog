@@ -129,7 +129,7 @@
                             @forelse ($user->abilities as $ability)
                                 <li class="list-group-item">{{ $ability->title }}</li>
                             @empty
-                                <li class="list-group-item"><i>No tiene permisos</i></li>
+                                <li class="list-group-item"><i>No tiene permisos adicionales</i></li>
                             @endforelse
                         </ul>
                     @endif

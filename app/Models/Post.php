@@ -68,6 +68,19 @@ class Post extends Model
         return $query->where('user_id', auth()->id());
     }
 
+    public function scopeByYearAndMonth($query)
+    {
+        return $query
+            ->selectRaw('year(published_at) year')
+            ->selectRaw('month(published_at) month')
+            ->selectRaw('monthname(published_at) monthname')
+            ->selectRaw('count(*) posts')
+            ->groupBy('year', 'month', 'monthname')
+            ->orderByDesc('year')
+            ->orderByDesc('month')
+            ;
+    }
+
     public function isPublished()
     {
         return ! is_null($this->published_at) && $this->published_at < today();
