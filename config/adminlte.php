@@ -30,7 +30,7 @@ return [
     |
     */
 
-    'use_ico_only' => false,
+    'use_ico_only' => true,
     'use_full_favicon' => false,
 
     /*
@@ -214,11 +214,6 @@ return [
         //     'topnav' => true,
         // ],
         // [
-        //     'text' => 'blog',
-        //     'url'  => 'admin/blog',
-        //     'can'  => 'manage-blog',
-        // ],
-        // [
         //     'text'        => 'pages',
         //     'url'         => 'admin/pages',
         //     'icon'        => 'far fa-fw fa-file',
@@ -232,7 +227,7 @@ return [
             'route'  => 'admin.dashboard',
             'icon' => 'fas fa-fw fa-home',
         ],
-        // ['header' => 'account_settings'],
+        ['header' => 'admin'],
         // [
         //     'text' => 'profile',
         //     'url'  => 'admin/settings',
@@ -247,13 +242,15 @@ return [
             'key'     => 'blog-menu',
             'text'    => 'Blog',
             'icon'    => 'fas fa-fw fa-bars',
-            // 'active'  => 'admin/posts/*',
+            'active'  => ['admin/posts/', 'admin/posts/*/edit'],
             'submenu' => [
                 [
-                    'key' => 'view-posts',
-                    'text' => 'Ver todos los posts',
-                    'icon' => 'fas fa-fw fa-eye',
-                    'route'  => 'admin.posts.index',
+                    'key'   => 'view-posts',
+                    'text'  => 'Ver todos los posts',
+                    'icon'  => 'fas fa-fw fa-eye',
+                    'route' => 'admin.posts.index',
+                    'can'   => 'viewAny',
+                    'model' => new App\Models\Post,
                 ],
             ],
         ],
@@ -261,7 +258,9 @@ return [
             'key'     => 'user-menu',
             'text'    => 'Usuarios',
             'icon'    => 'fas fa-fw fa-users',
-            // 'active'  => 'admin/posts/*',
+            'active'  => ['regex:@^admin/users/[0-9]+$@'],
+            'can'     => 'view',
+            'model'   => new App\User,
             'submenu' => [
                 [
                     'key' => 'view-users',
@@ -274,8 +273,35 @@ return [
                     'text' => 'Crear un usuario',
                     'icon' => 'fas fa-fw fa-pencil-alt',
                     'route'  => 'admin.users.create',
+                    'can' => 'create',
+                    'model' => new App\User
                 ],
             ],
+        ],
+        [
+            'text' => 'Perfil',
+            'route' => 'admin.users.profile',
+            'icon' => 'fas fa-fw fa-user',
+            'active' => ['admin/users/my_profile'],
+            'can' => 'view-profile',
+            'model' => new App\User
+        ],
+        [
+            'key' => 'roles',
+            'text' => 'Roles',
+            'route'  => 'admin.roles.index',
+            'icon' => 'fas fa-fw fa-pencil-alt',
+            'active' => ['admin/roles', 'admin/roles/*/edit'],
+            'can' => 'view',
+            'model' => new \Silber\Bouncer\Database\Role
+        ],
+        [
+            'text' => 'Permisos',
+            'route'  => 'admin.abilities.index',
+            'icon' => 'fas fa-fw fa-pencil-alt',
+            'active' => ['admin/abilities', 'admin/abilities/*/edit'],
+            'can' => 'view',
+            'model' => new \Silber\Bouncer\Database\Ability
         ],
         // ['header' => 'labels'],
         // [

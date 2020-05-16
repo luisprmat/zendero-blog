@@ -10,7 +10,8 @@
 	<link rel="stylesheet" href="/css/normalize.css">
 	<link rel="stylesheet" href="/css/framework.css">
 	<link rel="stylesheet" href="/css/style.css">
-	<link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="shortcut icon" href="/img/short-logo.png" type="image/x-icon">
 	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <script src="{{ asset('js/masonry.pkgd.min.js') }}"></script>
 </head>

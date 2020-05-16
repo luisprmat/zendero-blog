@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::allowed()->get();
+        $users = User::get();
 
         return view('admin.users.index', compact('users'));
     }
@@ -132,5 +132,14 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('admin.users.index')->withFlash('Usuario eliminado');
+    }
+
+    public function getProfile()
+    {
+        $user = auth()->user();
+
+        $this->authorize('view-profile', $user);
+
+        return view('admin.users.show', compact('user'));
     }
 }

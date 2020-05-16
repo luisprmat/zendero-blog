@@ -27,32 +27,29 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Dispatcher $events)
     {
-        $isIndex = [
-            'text' => 'Crear un post',
-            'icon' => 'fas fa-fw fa-pencil-alt',
-            'url'  => '#',
-            'data' => [
-                'toggle' => 'modal',
-                'target' => '#exampleModal'
-            ]
+        $menuButton = [
+            'text'  => 'Crear un post',
+            'icon'  => 'fas fa-fw fa-pencil-alt',
+            'can'   => 'create',
+            'model' => new \App\Models\Post
         ];
 
-        $isNotIndex = [
-            'text' => 'Crear un post',
-            'icon' => 'fas fa-fw fa-pencil-alt',
-            'route' => [
+        if (request()->is('admin/posts/*')) {
+            $menuButton['route'] = [
                 'admin.posts.index',
                 '#create'
-            ]
-        ];
+            ];
+        }
+        else {
+            $menuButton['url'] = '#';
+            $menuButton['data'] = [
+                'toggle' => 'modal',
+                'target' => '#exampleModal'
+            ];
+        }
 
-        $events->listen(BuildingMenu::class, function (BuildingMenu $event) use ($isIndex, $isNotIndex) {
-            if (request()->is('admin/posts/*')) {
-                $event->menu->addIn('blog-menu', $isNotIndex);
-            }
-            else {
-                $event->menu->addIn('blog-menu', $isIndex);
-            }
+        $events->listen(BuildingMenu::class, function (BuildingMenu $event) use ($menuButton) {
+            $event->menu->addIn('blog-menu', $menuButton);
         });
 
         Bouncer::tables([

@@ -23,7 +23,9 @@
 <div class="card card-primary card-outline">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h3 class="card-title">Todas las publicaciones</h3>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus fa-fw"></i> Crear publicación</button>
+        @can('create', $posts->first())
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus fa-fw"></i> Crear publicación</button>
+        @endcan
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -49,18 +51,22 @@
                                     target="_blank"
                                 ><i class="fas fa-eye fa-fw"></i></a>
 
-                                <a href="{{ route('admin.posts.edit', $post) }}"
-                                    class="btn btn-info btn-xs"
-                                ><i class="fas fa-pencil-alt fa-fw"></i></a>
-                                <form method="POST" action="{{ route('admin.posts.destroy', $post) }}"
-                                    style="display: inline"
-                                    >
-                                    @csrf @method('DELETE')
-                                    <button href="#" class="btn btn-danger btn-xs"
-                                        onclick="return confirm('¿Estás seguro de querer eliminar esta publicación?')"
-                                    ><i class="fas fa-times fa-fw"></i>
-                                    </button>
-                                </form>
+                                @can('update-posts')
+                                    <a href="{{ route('admin.posts.edit', $post) }}"
+                                        class="btn btn-info btn-xs"
+                                    ><i class="fas fa-pencil-alt fa-fw"></i></a>
+                                @endcan
+                                @can('delete-posts')
+                                    <form method="POST" action="{{ route('admin.posts.destroy', $post) }}"
+                                        style="display: inline"
+                                        >
+                                        @csrf @method('DELETE')
+                                        <button href="#" class="btn btn-danger btn-xs"
+                                            onclick="return confirm('¿Estás seguro de querer eliminar esta publicación?')"
+                                        ><i class="fas fa-times fa-fw"></i>
+                                        </button>
+                                    </form>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

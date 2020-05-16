@@ -12,8 +12,8 @@ class BouncerSeeder extends Seeder
      */
     public function run()
     {
-        $this->createRoles();
         $this->createAbilities();
+        $this->createRoles();
     }
 
     protected function createRoles()
@@ -23,10 +23,12 @@ class BouncerSeeder extends Seeder
             'title' => 'Administrador'
         ]);
 
-        Bouncer::role()->create([
+        $writer = Bouncer::role()->create([
             'name' => 'writer',
             'title' => 'Escritor'
         ]);
+
+        Bouncer::allow($writer)->to(['view-posts', 'create-posts', 'update-posts']);
     }
 
     protected function createAbilities()

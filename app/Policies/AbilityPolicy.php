@@ -18,7 +18,7 @@ class AbilityPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->isAn('admin');
+        return $user->isAn('admin') || $user->can('view-abilities');
     }
 
     /**
@@ -30,7 +30,7 @@ class AbilityPolicy
      */
     public function view(User $user, Ability $ability)
     {
-        return $user->isAn('admin') || $user->can('update-abilities');
+        return $user->isAn('admin') || $user->can('view-abilities');
     }
 
     /**

@@ -22,10 +22,12 @@
 @section('content')
 <div class="card card-primary card-outline">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h3 class="card-title">Todas las publicaciones</h3>
-        <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus fa-fw"></i> Crear usuario
-        </a>
+        <h3 class="card-title">Todas los usuarios</h3>
+        @can('create', $users->first())
+            <a href="{{ route('admin.users.create') }}" class="btn btn-primary">
+                <i class="fas fa-plus fa-fw"></i> Crear usuario
+            </a>
+        @endcan
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -42,30 +44,39 @@
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
-                        <tr>
-                            <td>{{ $user->id }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->roles->pluck('title')->implode(', ') }}</td>
-                            <td>
-                                <a href="{{ route('admin.users.show', $user) }}"
-                                    class="btn btn-secondary btn-xs"
-                                ><i class="fas fa-eye fa-fw"></i></a>
+                        @can('view', $user)
+                            <tr>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $user->roles->pluck('title')->implode(', ') }}</td>
+                                <td>
+                                    @can('view', $user)
+                                        <a href="{{ route('admin.users.show', $user) }}"
+                                            class="btn btn-secondary btn-xs"
+                                        ><i class="fas fa-eye fa-fw"></i></a>
+                                    @endcan
 
-                                <a href="{{ route('admin.users.edit', $user) }}"
-                                    class="btn btn-info btn-xs"
-                                ><i class="fas fa-pencil-alt fa-fw"></i></a>
-                                <form method="POST" action="{{ route('admin.users.destroy', $user) }}"
-                                    style="display: inline"
-                                    >
-                                    @csrf @method('DELETE')
-                                    <button href="#" class="btn btn-danger btn-xs"
-                                        onclick="return confirm('¿Estás seguro de querer eliminar este usuario?')"
-                                    ><i class="fas fa-times fa-fw"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                                    @can('update', $user)
+                                        <a href="{{ route('admin.users.edit', $user) }}"
+                                            class="btn btn-info btn-xs"
+                                        ><i class="fas fa-pencil-alt fa-fw"></i></a>
+                                    @endcan
+
+                                    @can('delete', $user)
+                                        <form method="POST" action="{{ route('admin.users.destroy', $user) }}"
+                                            style="display: inline"
+                                            >
+                                            @csrf @method('DELETE')
+                                            <button href="#" class="btn btn-danger btn-xs"
+                                                onclick="return confirm('¿Estás seguro de querer eliminar este usuario?')"
+                                            ><i class="fas fa-times fa-fw"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
+                                </td>
+                            </tr>
+                        @endcan
                     @endforeach
                 </tbody>
             </table>

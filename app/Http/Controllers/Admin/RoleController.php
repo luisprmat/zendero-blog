@@ -19,6 +19,8 @@ class RoleController extends Controller
      */
     public function index()
     {
+        $this->authorize('view', new Role);
+
         return view('admin.roles.index', [
             'roles' => Role::all()
         ]);
@@ -31,7 +33,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        $this->authorize('update', $role = new Role);
+        $this->authorize('create', $role = new Role);
 
         return view('admin.roles.create', [
             'abilities' => Ability::all(),

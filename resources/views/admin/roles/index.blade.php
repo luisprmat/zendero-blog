@@ -23,9 +23,11 @@
 <div class="card card-primary card-outline">
     <div class="card-header d-flex justify-content-between align-items-center">
         <h3 class="card-title">Todos los roles</h3>
-        <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
-            <i class="fas fa-plus fa-fw"></i> Crear rol
-        </a>
+        @can('create', $roles->first())
+            <a href="{{ route('admin.roles.create') }}" class="btn btn-primary">
+                <i class="fas fa-plus fa-fw"></i> Crear rol
+            </a>
+        @endcan
     </div>
     <!-- /.card-header -->
     <div class="card-body">
@@ -48,20 +50,24 @@
                             <td>{{ $role->title }}</td>
                             <td>{{ $role->abilities->pluck('title')->implode(', ') }}</td>
                             <td>
-                                <a href="{{ route('admin.roles.edit', $role) }}"
-                                    class="btn btn-info btn-xs"
-                                ><i class="fas fa-pencil-alt fa-fw"></i></a>
-                                @if ($role->name !== 'admin')
-                                    <form method="POST" action="{{ route('admin.roles.destroy', $role) }}"
-                                        style="display: inline"
-                                        >
-                                        @csrf @method('DELETE')
-                                        <button href="#" class="btn btn-danger btn-xs"
-                                            onclick="return confirm('¿Estás seguro de querer eliminar este rol?')"
-                                        ><i class="fas fa-times fa-fw"></i>
-                                        </button>
-                                    </form>
-                                @endif
+                                @can('update', $role)
+                                    <a href="{{ route('admin.roles.edit', $role) }}"
+                                        class="btn btn-info btn-xs"
+                                    ><i class="fas fa-pencil-alt fa-fw"></i></a>
+                                @endcan
+                                @can('delete', $role)
+                                    @if ($role->name !== 'admin')
+                                        <form method="POST" action="{{ route('admin.roles.destroy', $role) }}"
+                                            style="display: inline"
+                                            >
+                                            @csrf @method('DELETE')
+                                            <button href="#" class="btn btn-danger btn-xs"
+                                                onclick="return confirm('¿Estás seguro de querer eliminar este rol?')"
+                                            ><i class="fas fa-times fa-fw"></i>
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endcan
                             </td>
                         </tr>
                     @endforeach

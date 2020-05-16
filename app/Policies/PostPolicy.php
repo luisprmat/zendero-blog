@@ -37,8 +37,7 @@ class PostPolicy
      */
     public function view(User $user, Post $post)
     {
-        return $user->id === $post->user_id
-            || $user->can('view-posts');
+        return $user->id === $post->user_id;
     }
 
     /**

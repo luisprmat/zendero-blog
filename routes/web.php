@@ -30,15 +30,16 @@ Route::middleware('auth')
     Route::get('/', 'AdminController@index')->name('dashboard');
 
     Route::resource('posts', 'PostController')->except('show');
+    Route::get('users/my_profile', 'UserController@getProfile')->name('users.profile');
     Route::resource('users', 'UserController');
     Route::resource('roles', 'RoleController')->except('show');
     Route::resource('abilities', 'AbilityController')->only(['index', 'edit', 'update']);
 
     Route::put('users/{user}/roles', 'UserRolesController@update')
-        ->middleware('can:manage-roles-and-abilities')
+        // ->middleware('can:manage-roles-and-abilities')
         ->name('users.roles.update');
     Route::put('users/{user}/abilities', 'UserAbilitiesController@update')
-        ->middleware('can:manage-roles-and-abilities')
+        // ->middleware('can:manage-roles-and-abilities')
         ->name('users.abilities.update');
 
     Route::post('posts/{post}/photos', 'PhotoController@store')->name('posts.photos.store');

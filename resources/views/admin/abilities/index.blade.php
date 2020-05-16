@@ -43,9 +43,11 @@
                             <td>{{ $ability->name }}</td>
                             <td>{{ $ability->title }}</td>
                             <td>
-                                <a href="{{ route('admin.abilities.edit', $ability) }}"
-                                    class="btn btn-info btn-xs"
-                                ><i class="fas fa-pencil-alt fa-fw"></i></a>
+                                @can('update', $ability)
+                                    <a href="{{ route('admin.abilities.edit', $ability) }}"
+                                        class="btn btn-info btn-xs"
+                                    ><i class="fas fa-pencil-alt fa-fw"></i></a>
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
