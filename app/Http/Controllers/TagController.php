@@ -17,7 +17,7 @@ class TagController extends Controller
     {
         return view('pages.home', [
             'title' => "Publicaciones con la etiqueta '{$tag->name}'",
-            'posts' => $tag->posts()->paginate()
+            'posts' => $tag->posts()->published()->paginate()
         ]);
     }
 

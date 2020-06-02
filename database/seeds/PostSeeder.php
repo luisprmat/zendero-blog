@@ -87,6 +87,14 @@ class PostSeeder extends Seeder
             'category_id' => factory(Category::class)->create()->id,
             'user_id' => 2
         ]);
+
+        factory(Post::class)->create([
+            'title' => 'This is other post',
+            'excerpt' => 'This is an excerpt for my new post',
+            'published_at' => now(),
+            'category_id' => $this->categories->firstWhere('name', 'Paisajes'),
+            'user_id' => 1
+        ]);
     }
 
     protected function fetchRelations()
