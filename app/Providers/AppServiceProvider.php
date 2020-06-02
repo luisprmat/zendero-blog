@@ -28,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Dispatcher $events)
     {
+        \Debugbar::disable();
+
         DB::statement("SET lc_time_names = 'es_ES'");
 
         $menuButton = [
